@@ -1,0 +1,27 @@
+@layout('layouts/app')
+
+@section('content')
+  <main>
+    @each(post in posts)
+      <div class="border-2 bg-white w-9/12 my-6">
+        <div class="m-2 flex justify-between">
+          <div class="flex">
+            <img src="{{post.user.avatar}}" alt="" class="h-10 w-10 rounded-full border">
+            <a href="/{{ post.user.username }}" class="mx-3 mt-2 font-semibold">{{post.user.username}}</a>
+          </div>
+          <div>
+            <p class="font-semibold mx-3 tracking-wider"> ... </p>
+          </div>
+        </div>
+        <img src="{{post.image}}" alt="" width="100%">
+        <div class="p-4">
+          <div class="flex">
+            <a href="/{{ post.user.username }}" class="font-semibold">{{post.user.username}}</a>
+            <p class="mx-3">{{post.caption}}</p>
+          </div>
+          <p class="text-gray-500 my-5 text-xs">{{post.createdAt.toFormat('DD')}}</p>
+        </div>
+      </div>
+    @endeach
+  </main>
+@end

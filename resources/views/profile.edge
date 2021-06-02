@@ -1,0 +1,69 @@
+@layout('layouts/app')
+
+@section('content')
+  <div class="mt-10 flex juxtify-between flex-wrap w-full">
+    <div class="w-4/12 flex justify-center">
+      <img src="/{{user.avatar}}" alt="" class="w-40 h-40 rounded-full border">
+    </div>
+    <div class="w-8/12">
+      <div class="flex">
+        <h1 class="text-2xl tracking-wide">{{ user.username }}</h1>
+        @if (auth.user.id === user.id)
+        <a href="/accounts/edit" class="border border-gray-400 mx-4 rounded px-2 font-semibold">
+          Edit Profile
+        </a>
+        @else
+          @if(auth.user.followings.map(f => f.followingId).includes(user.id))
+            <form action="{{`/follow/${user.id}?_method=delete`}}" method="post">
+              <button type="submit" class="bg-red-500 text-white mx-4 py-1 rounded px-2 font-semibold">
+                unfollow
+              </button>
+            </form>
+          @else
+            <form action="{{`/follow/${user.id}`}}" method="post">
+              <button type="submit" class="bg-blue-500 text-white mx-4 py-1 rounded px-2 font-semibold">
+                follow
+              </button>
+            </form>
+          @endif
+
+        @endif
+      </div>
+      <div class="flex my-5">
+        <p class="mr-8">
+          <span class="font-semibold">{{ user.posts.length }}</span>
+          posts
+        </p>
+        <p class="mr-8">
+          <span class="font-semibold">{{ followers }}</span>
+          follewers
+        </p>
+        <p class="mr-8">
+          <span class="font-semibold">{{ user.followings.length }}</span>
+          followings
+        </p>
+      </div>
+      <div class="flex my-5">
+        <p class="mr-8">
+          {{ user.details }}
+        </p>
+      </div>
+    </div>
+    <section class="border-t w-full mt-20">
+      <h2 class="text-center text-sm p-2">POSTS
+        <a href="/posts/create" class="border border-gray-400 mx-4 rounded px-2 font-semibold"><i class="fa fa-plus"></i></a>
+      </h2>
+      <article class="grid grid-cols-3 gap-10 px-10">
+        @each(post in user.posts)
+        <img src="{{ post.image }}" alt="" class="w-64 h-54 border">
+        @endeach
+      </article>
+    </section>
+  </div>
+  @if(auth.user.email_verification_at === null)
+  <p class="text-red-500">Your account is not actived</p>
+  <form action="/verify-email" method="post">
+    <input type="submit" value="Resend" class="border border-gray-400 mx-4 rounded px-2 font-semibold">
+  </form>
+  @endif
+@end

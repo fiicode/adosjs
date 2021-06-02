@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Adonis Js</title>
+</head>
+<body>
+  <nav class="w-full bg-white shadow-md border flex justify-center px-4 py-2">
+    <div class="w-1/2 flex justify-between">
+      <h1 class="text-xl font-semibold">
+        <a href="/">Adonis Js</a>
+      </h1>
+      @if(auth.isAuthenticated)
+      <div>
+        <a href="/{{`${auth.user.username}` }}"><img src="/{{(auth.user.avatar)}}" class="h-8 w-8 rounded-full border" alt="profile"></a>
+      </div>
+      <form action="/logout" method="post">
+        {{ auth.user.username }} <button type="submit" class="border border-gray-400 mx-4 rounded px-2 font-semibold">Logout</button>
+      </form>
+      @else
+        <a href="/login" class="border border-gray-400 mx-4 rounded px-2 font-semibold">
+          login
+        </a>
+      @endif
+    </div>
+  </nav>
+  <div class="bg-gray-100 min-h-screen flex justify-center">
+    <div class="w-full md:w-1/2">
+      @section('content')
+      @end
+    </div>
+  </div>
+</body>
+</html>

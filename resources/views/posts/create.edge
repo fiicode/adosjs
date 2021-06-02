@@ -1,0 +1,18 @@
+@layout('layouts/app')
+
+@section('content')
+<div class="mt-20 bg-white border rounded p-5">
+    <h2 class="text-center text-2xl my-4"> Create new Post </h2>
+    <form action="" method="post" enctype="multipart/form-data" class="py-2">
+      <div>
+        <p class="my2">Caption</p>
+        <textarea name="caption" class="border w-full" rows="4" placeholder="Your host caption"></textarea>
+      </div>
+      <div class="my-5">
+        <p class="my-2">Upload post</p>
+        <input type="file" name="image" class="w-full"/>
+      </div>
+      <input type="submit" value="Update" class="px-2 py-1 bg-blue-500 text-white border rounded"/>
+    </form>
+  </div>
+@endsection

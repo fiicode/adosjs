@@ -1,0 +1,36 @@
+@layout('layouts/app')
+
+@section('content')
+@section('content')
+  <section class="flex justify-center py-10">
+    <div class="border" style="width:22rem">
+      <article class="border bg-white p-10">
+        <h1 class="text-4xl text-center px-12 py-6">Adonisgram</h1>
+        <form method="post" action="/login">
+          <div>
+            <input class="w-full bg-gray-200 text-sm rounded-sm px-2 py-2 border-grey-600 my-1 placeholder-gray-400" type="email" name="email" placeholder="Mobile Number or Email">
+            @if(flashMessages.has('errors.email'))
+              <small>{{flashMessages.get('errors.email')}}</small>
+            @endif
+          </div>
+          <div>
+            <input class="w-full bg-gray-200 text-sm rounded-sm px-2 py-2 border my-1 placeholder-gray-400" type="password" name="password" placeholder="Password">
+            @if(flashMessages.has('errors.password'))
+              <small>{{flashMessages.get('errors.password')}}</small>
+            @endif
+          </div>
+          <div>
+            <input type="submit" class="w-full bg-blue-500 text-white rounded px-4" value="Sign Up">
+          </div>
+        </form>
+        <p class="text-center text-gray-600 text-sm py-3">-------- OR -------</p>
+        <p class="w-full text-center px-2 bold">Login in with Facebook</p>
+        <p class="w-full text-center px-2 text-gray-400">Forgot Password ?</p>
+      </article>
+      <article class="border mt-3 py-8 text-center bg-white">
+        Have an account? <a href="/register" class="text-blue-400">Sign Up</a>
+      </article>
+    </div>
+  </section>
+@end
+@end
